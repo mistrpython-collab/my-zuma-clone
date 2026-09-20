@@ -40,6 +40,20 @@ class GameScene extends Phaser.Scene {
     this.spawnInitialBalls(30);
     const availableColors = this.getAvailableColors();
     this.frog.syncColors(availableColors);
+
+    this.pathSystem.drawDebug(this);
+
+    // Coordinate tracker - shows mouse position
+const coordText = this.add.text(10, 10, 'X: 0, Y: 0', {
+  fontSize: '16px',
+  fill: '#ffffff',
+  backgroundColor: '#000000',
+  padding: { x: 5, y: 5 }
+}).setDepth(200);
+
+this.input.on('pointermove', (pointer) => {
+  coordText.setText(`X: ${Math.round(pointer.x)}, Y: ${Math.round(pointer.y)}`);
+});
   }
 
   update(time, delta) {
